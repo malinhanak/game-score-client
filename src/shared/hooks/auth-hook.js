@@ -11,6 +11,7 @@ const getExpirationDate = () => {
 export const useAuth = () => {
   const [cookies, setCookie, removeCookie] = useCookies(['sid']);
   const [sid, setSid] = useState(cookies?.sid);
+  const [isOnline, setIsOnline] = useState(cookies.sid ? true : false);
 
   const login = async (credentials) => {
     const res = await fetch('http://localhost:4000/api/sessions/login-team', {
@@ -22,6 +23,7 @@ export const useAuth = () => {
     const userObj = await res.json();
 
     setSid(userObj ? userObj : null);
+    setIsOnline(true);
     setCookie('sid', JSON.stringify(userObj), {
       path: '/',
       expires: getExpirationDate(),
@@ -31,8 +33,9 @@ export const useAuth = () => {
 
   const logout = () => {
     removeCookie('sid', { path: '/' });
+    setIsOnline(false);
     setSid(null);
   };
 
-  return [sid, login, logout];
+  return [sid, isOnline, login, logout];
 };
