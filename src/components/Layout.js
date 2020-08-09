@@ -6,6 +6,7 @@ import { authContext, useFetch, year } from '../shared';
 import SideDrawer from './SideDrawer';
 import Backdrop from './Backdrop';
 import Header from './Header';
+import Footer from './Footer';
 
 const URI = 'http://localhost:4000';
 
@@ -30,12 +31,9 @@ const Layout = (props) => {
         </SideDrawer>
       )}
       {isOpen && <Backdrop close={closeDrawer} />}
-      <button onClick={() => auth.login({ name: 'Team 1', password: 'hemligtord' })}>
-        Logga in team
-      </button>
-      {auth.name}: {score === 0 ? score : score.score}
-      App
-      <section style={{ marginTop: '3rem' }}>{props.children}</section>
+      {/* {auth.name}: {score === 0 ? score : score.score} */}
+      <section style={{ height: '100vh' }}>{props.children}</section>
+      <Footer />
     </>
   );
 };
