@@ -7,6 +7,15 @@ body {
   margin: 0;
   padding: 0;
   font-size: 16px;
+  font-family: 'Montserrat', sans-serif;
+
+  display: grid;
+  grid-template-rows: minmax(96px, auto) minmax(100px, auto) minmax(96px, auto);
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    'header'
+    'content'
+    'footer';
 }
 
 html {
@@ -16,16 +25,8 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
-nav {
-  width: 100vw;
-  max-width: 100%;
-
-  background-color: #badfdb;
-  color: #154961;
-
-  font-size: 2rem;
-
-  padding: 1rem 1rem;
+main#root {
+  grid-area: content;
 }
 
 .main-navigation__header-nav {

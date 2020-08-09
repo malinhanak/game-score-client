@@ -1,23 +1,33 @@
 nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100vw;
-  max-width: 100%;
+  position: fixed;
+  z-index: 40;
+  top: 0;
+  left: 0;
 
-  background-color: #badfdb;
-  color: #154961;
+  grid-area: header;
+  max-height: 96px;
 
-  font-size: 2rem;
+  .navigation-header-blue {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100vw;
+    max-width: 100%;
 
-  padding: 1rem 1rem;
-
-  a {
-    text-decoration: none;
-    text-transform: uppercase;
-    font-size: 1rem;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 500;
+    background-color: #badfdb;
     color: #154961;
+
+    font-size: 2rem;
+
+    padding: 1rem 1rem;
+
+    a {
+      text-decoration: none;
+      text-transform: uppercase;
+      font-size: 1rem;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
+      color: #154961;
+    }
   }
 }

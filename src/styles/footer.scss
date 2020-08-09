@@ -1,0 +1,13 @@
+footer {
+  position: fixed;
+  z-index: 40;
+  bottom: 0;
+  left: 0;
+
+  grid-area: footer;
+  height: 96px;
+  max-height: 96px;
+  width: 100%;
+
+  background-color: #badfdb;
+}
