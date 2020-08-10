@@ -56,7 +56,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   main#root {
-    margin-top: 96px;
+    margin-top: 80px;
   }
 
 
