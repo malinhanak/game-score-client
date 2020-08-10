@@ -17,7 +17,7 @@ export const GlobalStyle = createGlobalStyle`
     -moz-osx-font-smoothing: grayscale;
   }
 
-  body, p, button, article, section, input {
+  body, p, button, article, section, input, h1 {
     font-size: 16px;
     font-family: 'Roboto', sans-serif;
     font-weight: 100;
@@ -49,6 +49,10 @@ export const GlobalStyle = createGlobalStyle`
 
     background-color: ${(props) => props.theme.colors.mosque};
     color: ${(props) => props.theme.colors.jetStream};
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   main#root {

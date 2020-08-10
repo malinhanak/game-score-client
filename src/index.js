@@ -6,20 +6,22 @@ import { ThemeProvider } from 'styled-components';
 
 import App from './App';
 import { GlobalStyle, theme } from './styles';
-import { AuthProvider } from './shared';
+import { AuthProvider, ScoreProvider } from './shared';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <CookiesProvider>
     <AuthProvider>
-      <React.StrictMode>
-        <ThemeProvider theme={theme}>
-          <BrowserRouter>
-            <GlobalStyle />
-            <App />
-          </BrowserRouter>
-        </ThemeProvider>
-      </React.StrictMode>
+      <ScoreProvider>
+        <React.StrictMode>
+          <ThemeProvider theme={theme}>
+            <BrowserRouter>
+              <GlobalStyle />
+              <App />
+            </BrowserRouter>
+          </ThemeProvider>
+        </React.StrictMode>
+      </ScoreProvider>
     </AuthProvider>
   </CookiesProvider>,
   document.getElementById('root')
