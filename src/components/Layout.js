@@ -23,7 +23,7 @@ const Layout = (props) => {
       {isOpen && (
         <SideDrawer close={closeDrawer} isOpen={isOpen}>
           <DrawerLinks>
-            <NavLinks />
+            <NavLinks close={closeDrawer} />
           </DrawerLinks>
         </SideDrawer>
       )}
