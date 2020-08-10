@@ -13,7 +13,9 @@ export const useAuth = () => {
   const [sid, setSid] = useState(cookies?.sid);
   const [isOnline, setIsOnline] = useState(cookies.sid ? true : false);
 
-  const login = async (credentials) => {
+  const login = async (event, redirect, credentials) => {
+    event.preventDefault();
+    console.log('CRED', credentials);
     const res = await fetch('http://localhost:4000/api/sessions/login-team', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
@@ -29,6 +31,7 @@ export const useAuth = () => {
       expires: getExpirationDate(),
       sameSite: true
     });
+    redirect.replace('/');
   };
 
   const logout = () => {

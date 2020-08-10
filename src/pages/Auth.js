@@ -3,13 +3,17 @@ import { authContext } from '../shared';
 import { Input, Button as Submit } from '../components';
 import { Form } from '../styles';
 
-const Auth = () => {
+const Auth = ({ history }) => {
   const auth = useContext(authContext);
   const [team, setTeam] = useState('');
   const [password, setPassword] = useState('');
 
   return (
-    <Form onSubmit={() => auth.login({ name: team, password: password })}>
+    <Form
+      onSubmit={(e) =>
+        auth.login(e, history, { name: team, password: password })
+      }
+    >
       <Input
         placeholder="Team namn"
         type="text"
