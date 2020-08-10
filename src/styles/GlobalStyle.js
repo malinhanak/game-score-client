@@ -60,17 +60,6 @@ export const GlobalStyle = createGlobalStyle`
     height: 100%;
   }
 
-  .side-drawer {
-    position: fixed;
-    left: 0;
-    top: 0;
-    z-index: 100;
-    height: 100vh;
-    width: 70%;
-    background: ${(props) => props.theme.colors.wildSand};
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-  }
-
   .slide-in-left-enter {
     transform: translateX(-100%);
   }
@@ -90,16 +79,6 @@ export const GlobalStyle = createGlobalStyle`
     transform: translateX(-100%);
     opacity: 0;
     transition: all 200ms;
-  }
-
-  .backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background-color: ${(props) => props.theme.colors.backdrop};
-    z-index: 10;
   }
 
   @media (min-width: 768px) {

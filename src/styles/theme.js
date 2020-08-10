@@ -7,6 +7,6 @@ export const theme = {
     mineShaft: '#343434',
     jetStream: '#b9d2d2',
     disabled: 'lightgrey',
-    backdrop: 'rgba(52, 52, 52, 0.5)'
+    backdrop: 'rgba(52, 52, 52, 0.7)'
   }
 };
