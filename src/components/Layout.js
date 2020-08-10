@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import styled from 'styled-components';
 import { NavLinks } from './';
 import { authContext, useFetch, year } from '../shared';
 import SideDrawer from './SideDrawer';
@@ -29,10 +30,18 @@ const Layout = (props) => {
       )}
       {isOpen && <Backdrop close={closeDrawer} />}
       {/* {auth.name}: {score === 0 ? score : score.score} */}
-      <section>{props.children}</section>
+      <Content>{props.children}</Content>
       <Footer />
     </>
   );
 };
+
+const Content = styled.section`
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+
+  margin: 0 auto;
+`;
 
 export default Layout;
