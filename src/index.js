@@ -2,8 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { CookiesProvider } from 'react-cookie';
-import './styles/index.scss';
+import { ThemeProvider } from 'styled-components';
+
 import App from './App';
+import { GlobalStyle, theme } from './styles';
 import { AuthProvider } from './shared';
 import * as serviceWorker from './serviceWorker';
 
@@ -11,9 +13,12 @@ ReactDOM.render(
   <CookiesProvider>
     <AuthProvider>
       <React.StrictMode>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
+        <ThemeProvider theme={theme}>
+          <BrowserRouter>
+            <GlobalStyle />
+            <App />
+          </BrowserRouter>
+        </ThemeProvider>
       </React.StrictMode>
     </AuthProvider>
   </CookiesProvider>,

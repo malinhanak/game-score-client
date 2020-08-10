@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { NavLink } from 'react-router-dom';
 import { NavLinks } from './';
 import { authContext } from '../shared';
-import '../styles/footer.scss';
 
 const Footer = ({ toggleDrawer }) => {
   const auth = useContext(authContext);

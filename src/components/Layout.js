@@ -1,6 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
-import { Switch, Route } from 'react-router-dom';
-import { useCookies } from 'react-cookie';
+import React, { useState, useContext } from 'react';
 import { NavLinks } from './';
 import { authContext, useFetch, year } from '../shared';
 import SideDrawer from './SideDrawer';
@@ -25,14 +23,12 @@ const Layout = (props) => {
       <Header toggleDrawer={toggleDrawer} />
       {isOpen && (
         <SideDrawer close={closeDrawer} isOpen={isOpen}>
-          <section className="main-navigation__drawer-nav">
-            <NavLinks />
-          </section>
+          <NavLinks />
         </SideDrawer>
       )}
       {isOpen && <Backdrop close={closeDrawer} />}
       {/* {auth.name}: {score === 0 ? score : score.score} */}
-      <section style={{ height: '100vh' }}>{props.children}</section>
+      <section>{props.children}</section>
       <Footer />
     </>
   );

@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
-import moment from 'moment';
-import { useFetch } from '../shared';
+import styled from 'styled-components';
+import { authContext, useFetch } from '../shared';
 import { year } from '../shared';
-import '../styles/nav-links.scss';
 
 const NavLinks = () => {
-  const [links, linksError, isLoadingLinks] = useFetch(`/api/game/${year}`, null);
+  const auth = useContext(authContext);
+  const [links, linksError, isLoadingLinks] = useFetch(
+    `/api/game/${year}`,
+    null
+  );
 
   const yearlyGameLinks = links?.map((link) => (
     <NavLink to={`/game/${link}`} key={link}>
@@ -14,11 +17,49 @@ const NavLinks = () => {
     </NavLink>
   ));
 
-  return (
-    <section className="nav-links">
-      {yearlyGameLinks}
-      <NavLink to="/auth">Logga in Team</NavLink>
-    </section>
-  );
+  return <Styles>{yearlyGameLinks}</Styles>;
 };
+
+const Styles = styled.section`
+  margin: 0;
+  padding: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  a {
+    color: ${(props) => props.theme.colors.mineShaft};
+    text-decoration: none;
+    padding: 0.5rem;
+  }
+
+  a:hover,
+  a:active,
+  a.active {
+    background-color: ${(props) => props.theme.colors.mosque};
+    color: ${(props) => props.theme.colors.accent};
+    padding: 0.5rem;
+  }
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+
+    a {
+      color: ${(props) => props.theme.colors.jetStream};
+      text-decoration: none;
+    }
+
+    a:hover,
+    a:active,
+    a.active {
+      color: ${(props) => props.theme.colors.accent};
+    }
+  }
+`;
+
 export default NavLinks;
