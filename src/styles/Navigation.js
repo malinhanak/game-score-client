@@ -33,11 +33,3 @@ export const Navigation = styled.nav`
     }
   }
 `;
-
-export const Links = styled.section`
-  display: none;
-
-  @media (min-width: 768px) {
-    display: block;
-  }
-`;

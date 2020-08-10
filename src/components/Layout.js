@@ -5,6 +5,7 @@ import SideDrawer from './SideDrawer';
 import Backdrop from './Backdrop';
 import Header from './Header';
 import Footer from './Footer';
+import { DrawerLinks } from '../styles';
 
 const URI = 'http://localhost:4000';
 
@@ -12,8 +13,6 @@ const Layout = (props) => {
   const auth = useContext(authContext);
   const [isOpen, setIsOpen] = useState(false);
   const [score, scoreError, isLoadingScore] = useFetch(`/api/game/${year}`, 0);
-
-  console.log('SCORE', score);
 
   const toggleDrawer = () => setIsOpen(!isOpen);
   const closeDrawer = () => setIsOpen(false);
@@ -23,7 +22,9 @@ const Layout = (props) => {
       <Header toggleDrawer={toggleDrawer} />
       {isOpen && (
         <SideDrawer close={closeDrawer} isOpen={isOpen}>
-          <NavLinks />
+          <DrawerLinks>
+            <NavLinks />
+          </DrawerLinks>
         </SideDrawer>
       )}
       {isOpen && <Backdrop close={closeDrawer} />}
