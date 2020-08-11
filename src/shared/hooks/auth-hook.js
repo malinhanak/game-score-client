@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useCookies } from 'react-cookie';
 import moment from 'moment';
 
-import { baseURI_Dev, loginTeam, getHeaders } from '../';
+import { api, LOGIN_TEAM } from '../';
 
 const getExpirationDate = () => {
   const current = new Date();
@@ -18,21 +18,21 @@ export const useAuth = () => {
   const login = async (event, redirect, credentials) => {
     event.preventDefault();
 
-    const res = await fetch(`${baseURI_Dev}${loginTeam}`, {
-      method: 'POST',
-      headers: getHeaders(null),
-      body: JSON.stringify(credentials)
-    });
+    try {
+      const response = await api.post(LOGIN_TEAM, { credentials });
+      const userObj = response.data;
+      await setCookie('sid', JSON.stringify(userObj), {
+        path: '/',
+        expires: getExpirationDate(),
+        sameSite: true
+      });
 
-    const userObj = await res.json();
-
-    setSid(userObj ? userObj : null);
-    setIsOnline(true);
-    await setCookie('sid', JSON.stringify(userObj), {
-      path: '/',
-      expires: getExpirationDate(),
-      sameSite: true
-    });
+      setSid(userObj ? userObj : null);
+      setIsOnline(true);
+      redirect.push('/');
+    } catch (err) {
+      console.error('Login Team Error', err);
+    }
 
     redirect.push('/');
   };

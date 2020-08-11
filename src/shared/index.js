@@ -7,4 +7,11 @@ export { useAuth } from './hooks/auth-hook';
 export { useFetch } from './hooks/fetch-hook';
 
 export { year, createSlug, getHeaders } from './helpers';
-export { baseURI, baseURI_Dev, getScore, loginTeam } from './uri';
+export {
+  api,
+  baseURI,
+  baseURI_Dev,
+  GET_SCORE,
+  LOGIN_TEAM,
+  GET_NAVLINKS
+} from './uri';
