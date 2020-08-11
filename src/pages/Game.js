@@ -1,23 +1,29 @@
-import React from 'react';
+import React, { useEffect, useContext } from 'react';
 import renderHTML from 'react-render-html';
 import { useParams } from 'react-router-dom';
 
-import { useFetch, createSlug } from '../shared';
+import { useFetch, Store, GET_GAME_RULE } from '../shared';
 
-const Game = ({ match }) => {
-  const { game } = useParams();
-  const [gameRule, gameRuleError, isLoadingGameRule] = useFetch(
-    `/api/game/rules/${createSlug(game)}`,
-    null
-  );
+const Game = () => {
+  const { game: name } = useParams();
+  const { dispatch } = useContext(Store);
+  const [data, error, isLoading] = useFetch(GET_GAME_RULE(name), null);
 
-  if (isLoadingGameRule) return 'Laddar regler';
-  console.log('DATA', gameRule);
-  if (gameRuleError) console.log(gameRuleError);
+  useEffect(() => {
+    return () => {
+      dispatch({ type: 'CLEAR_ERROR' });
+      dispatch({ type: 'CLEAR_CONTENT' });
+    };
+    // eslint-disable-next-line
+  }, [name]);
+
+  if (isLoading) return 'Laddar regler';
+
   return (
     <>
-      <h3>{game}</h3>
-      {gameRule && renderHTML(gameRule.rules)}
+      <h3>{name}</h3>
+      {data && renderHTML(data.rules)}
+      {error && error}
     </>
   );
 };
