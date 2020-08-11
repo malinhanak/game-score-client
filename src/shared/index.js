@@ -5,6 +5,7 @@ export { authContext } from './context/auth-context';
 export { default as AuthProvider } from './context/auth-context';
 export { useAuth } from './hooks/auth-hook';
 export { useFetch } from './hooks/fetch-hook';
+export { default as ContentProvider, Store } from './store';
 
 export { year, createSlug, getHeaders } from './helpers';
 export {
@@ -13,5 +14,6 @@ export {
   baseURI_Dev,
   GET_SCORE,
   LOGIN_TEAM,
-  GET_NAVLINKS
+  GET_NAVLINKS,
+  GET_GAME_RULE
 } from './uri';

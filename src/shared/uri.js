@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Cookies from 'universal-cookie';
 
-import { year } from './';
+import { year, createSlug } from './';
 
 export const baseURI_Dev = 'http://localhost:4000';
 export const baseURI = 'https://new-game-store.herokuapp.com';
@@ -31,3 +31,7 @@ api.interceptors.request.use(
 export const GET_SCORE = '/api/teams/get-score';
 export const LOGIN_TEAM = '/api/sessions/login-team';
 export const GET_NAVLINKS = `/api/game/${year}`;
+
+export const GET_GAME_RULE = (name) => {
+  return `/api/game/rules/${createSlug(name)}`;
+};
