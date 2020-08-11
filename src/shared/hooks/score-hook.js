@@ -1,12 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
-import moment from 'moment';
 
-const getExpirationDate = () => {
-  const current = new Date();
-  const expires = moment(current).add(12, 'h').format();
-  return new Date(expires);
-};
+import { baseURI_Dev, getScore, getHeaders } from '../';
 
 export const useScore = () => {
   const [cookies] = useCookies(['sid']);
@@ -15,13 +10,11 @@ export const useScore = () => {
   useEffect(() => {
     const initialScore = async () => {
       if (!cookies.sid) return setScore(0);
-      const res = await fetch('http://localhost:4000/api/teams/get-score', {
+      const res = await fetch(`${baseURI_Dev}${getScore}`, {
         method: 'GET',
-        headers: {
-          'content-type': 'application/json',
-          Authorization: `Bearer ${cookies.sid.token}`
-        }
+        headers: getHeaders(cookies)
       });
+
       const result = await res.json();
       sessionStorage.setItem('score', result.score);
 
@@ -29,15 +22,12 @@ export const useScore = () => {
     };
 
     initialScore();
-  }, []);
+  }, [cookies]);
 
   const getTeamScore = async () => {
     const res = await fetch('http://localhost:4000/api/teams/get-score', {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-        Authorization: `Bearer ${cookies.sid.token}`
-      }
+      method: 'GET',
+      headers: getHeaders(cookies)
     });
     const result = await res.json();
 
