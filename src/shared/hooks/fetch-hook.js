@@ -1,32 +1,29 @@
-import { useState, useEffect } from 'react';
-import { useCookies } from 'react-cookie';
+import { useContext, useState, useEffect } from 'react';
 
-import { baseURI } from '../';
-import { getHeaders } from '../helpers';
+import { api, Store } from '../';
 
-export const useFetch = (url, initialValue, method = 'GET', body = null) => {
-  const [cookies] = useCookies(['sid']);
-  const [response, setResponse] = useState(initialValue);
-  const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+export const useFetch = (url) => {
+  const { state, dispatch } = useContext(Store);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const fetchData = async () => {
+    return api
+      .get(url)
+      .then(({ data }) => {
+        setIsLoading(false);
+        dispatch({ type: 'SET_CONTENT', payload: data });
+      })
+      .catch((err) => {
+        setIsLoading(false);
+        const error = `Server svara med ${err.response.status}: ${err.response.data.message}`;
+        dispatch({ type: 'SET_ERROR', payload: error });
+      });
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      fetch(`${baseURI}${url}`, { method, headers: getHeaders(cookies), body })
-        .then((response) => response.json())
-        .then((data) => {
-          setResponse(data);
-          setIsLoading(false);
-        })
-        .catch((err) => {
-          setError(err);
-          setIsLoading(false);
-        });
-    };
-
     fetchData();
     // eslint-disable-next-line
-  }, [method, body, url]);
+  }, [url]);
 
-  return [response, error, isLoading];
+  return [state.content, state.error, isLoading];
 };
