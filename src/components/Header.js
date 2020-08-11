@@ -3,15 +3,15 @@ import ReactDOM from 'react-dom';
 import { NavLink } from 'react-router-dom';
 import { NavLinks } from './';
 import { authContext } from '../shared';
-import { Navigation, Links, TopLinks } from '../styles';
+import { Navigation, TopLinks } from '../styles';
 
-const Header = ({ toggleDrawer }) => {
+const Header = ({ toggleDrawer, links }) => {
   const auth = useContext(authContext);
   const header = (
     <Navigation>
       <ion-icon name="menu-outline" onClick={toggleDrawer}></ion-icon>
       <TopLinks>
-        <NavLinks />
+        <NavLinks links={links} />
       </TopLinks>
       {!auth.isOnline && (
         <NavLink id="auth-link" to="/auth">

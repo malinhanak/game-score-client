@@ -1,38 +1,38 @@
-import React, { useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { NavLinks } from './';
-import { authContext, useFetch, year } from '../shared';
 import SideDrawer from './SideDrawer';
 import Backdrop from './Backdrop';
 import Header from './Header';
 import Footer from './Footer';
 import { DrawerLinks } from '../styles';
-
-const URI = 'http://localhost:4000';
+import { useFetch, year } from '../shared';
 
 const Layout = (props) => {
-  const auth = useContext(authContext);
   const [isOpen, setIsOpen] = useState(false);
-  const [score, scoreError, isLoadingScore] = useFetch(`/api/game/${year}`, 0);
+  const [links, error, isLoading] = useFetch(`/api/game/${year}`, null);
 
   const toggleDrawer = () => setIsOpen(!isOpen);
   const closeDrawer = () => setIsOpen(false);
 
+  useEffect(() => {}, [links, isLoading]);
+
   return (
-    <>
-      <Header toggleDrawer={toggleDrawer} />
-      {isOpen && (
-        <SideDrawer close={closeDrawer} isOpen={isOpen}>
-          <DrawerLinks>
-            <NavLinks close={closeDrawer} />
-          </DrawerLinks>
-        </SideDrawer>
-      )}
-      {isOpen && <Backdrop close={closeDrawer} />}
-      {/* {auth.name}: {score === 0 ? score : score.score} */}
-      <Content>{props.children}</Content>
-      <Footer />
-    </>
+    links && (
+      <>
+        <Header toggleDrawer={toggleDrawer} links={links} />
+        {isOpen && (
+          <SideDrawer close={closeDrawer} isOpen={isOpen}>
+            <DrawerLinks>
+              <NavLinks close={closeDrawer} links={links} />
+            </DrawerLinks>
+          </SideDrawer>
+        )}
+        {isOpen && <Backdrop close={closeDrawer} />}
+        <Content>{props.children}</Content>
+        <Footer />
+      </>
+    )
   );
 };
 
