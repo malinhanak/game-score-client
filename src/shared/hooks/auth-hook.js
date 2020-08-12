@@ -19,7 +19,7 @@ export const useAuth = () => {
     event.preventDefault();
 
     try {
-      const response = await api.post(LOGIN_TEAM, { credentials });
+      const response = await api.post(LOGIN_TEAM, { ...credentials });
       const userObj = response.data;
       await setCookie('sid', JSON.stringify(userObj), {
         path: '/',
