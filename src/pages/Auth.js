@@ -8,11 +8,17 @@ const Auth = ({ history }) => {
   const [team, setTeam] = useState('');
   const [password, setPassword] = useState('');
 
+  const clear = () => {
+    setTeam('');
+    setPassword('');
+  };
+
   return (
     <Form
-      onSubmit={(e) =>
-        auth.login(e, history, { name: team, password: password })
-      }
+      onSubmit={(e) => {
+        auth.login(e, history, { name: team, password: password });
+        clear();
+      }}
     >
       <Input
         placeholder="Team namn"
