@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { NavLinks } from './';
-import SideDrawer from './SideDrawer';
-import Backdrop from './Backdrop';
-import Header from './Header';
-import Footer from './Footer';
+import { Backdrop, SideDrawer, Header, Footer } from './';
 import { DrawerLinks } from '../styles';
 
 const Layout = ({ children, links }) => {
