@@ -15,5 +15,6 @@ export {
   GET_SCORE,
   LOGIN_TEAM,
   GET_NAVLINKS,
-  GET_GAME_RULE
+  GET_GAME_RULE,
+  SET_SCORE
 } from './uri';
