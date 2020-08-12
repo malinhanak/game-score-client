@@ -2,3 +2,8 @@ export { default as NavLinks } from './NavLinks';
 export { default as Layout } from './Layout';
 export { default as Input } from './Input';
 export { default as Button } from './Btn';
+export { default as Footer } from './Footer';
+export { default as AddPoints } from './AddPoints';
+export { default as Backdrop } from './Backdrop';
+export { default as Header } from './Header';
+export { default as SideDrawer } from './SideDrawer';
