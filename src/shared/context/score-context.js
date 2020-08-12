@@ -4,17 +4,19 @@ import { useScore } from '../';
 export const scoreContext = createContext({
   score: 0,
   getTeamScore: () => {},
-  getScores: () => {}
+  getScores: () => {},
+  updateTeamScore: () => {}
 });
 
 const { Provider } = scoreContext;
 const ScoreProvider = ({ children }) => {
-  const [score, getTeamScore] = useScore();
+  const [score, getTeamScore, updateTeamScore] = useScore();
   return (
     <Provider
       value={{
         score: score,
-        getTeamScore
+        getTeamScore,
+        updateTeamScore
       }}
     >
       {children}
